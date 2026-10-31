@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial C++ - Clasa a X-a</title>
+    <!-- Tailwind CSS pentru interfață modernă și fluidă -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;850&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
+
+    <!-- Header Principal -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 bg-indigo-950/50 border border-indigo-500/30 rounded-xl">
+                    <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                        Tutorial C++
+                        <span class="text-[10px] font-bold bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-500/30 uppercase tracking-wider">Clasa a X-a</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 font-medium font-sans">Sintaxă, operatori în detaliu, exemple compilabile și simulator de rulare fără scheme logice</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Colegiul Național „Elena Cuza” Craiova 
+                </span>
+				 <span class="text-xs bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                   
+					Prof. Cîlţan Alina-Florentina
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout Principal -->
+    <div class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Coloana Stângă: Teoria în Detaliu -->
+        <aside class="lg:col-span-5 flex flex-col gap-4">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 shadow-xl backdrop-blur-sm">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                    <span>📘 Ghid Teoretic</span>
+                </h2>
+                <!-- Navigare Module Teorie -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5" id="theory-tabs">
+                    <button onclick="showTheoryTab('t-ide')" id="btn-t-ide" class="t-nav-btn text-[11px] font-semibold py-2 px-1 rounded-lg text-center transition-all bg-indigo-600 text-white border border-indigo-500/30">
+                        0. IDE
+                    </button>
+                    <button onclick="showTheoryTab('t-vocab')" id="btn-t-vocab" class="t-nav-btn text-[11px] font-semibold py-2 px-1 rounded-lg text-center transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+                        1. Intro
+                    </button>
+                    <button onclick="showTheoryTab('t-ops')" id="btn-t-ops" class="t-nav-btn text-[11px] font-semibold py-2 px-1 rounded-lg text-center transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+                        2. Operatori
+                    </button>
+                    <button onclick="showTheoryTab('t-alt')" id="btn-t-alt" class="t-nav-btn text-[11px] font-semibold py-2 px-1 rounded-lg text-center transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+                        3. Alternativ
+                    </button>
+                    <button onclick="showTheoryTab('t-rep')" id="btn-t-rep" class="t-nav-btn text-[11px] font-semibold py-2 px-1 rounded-lg text-center transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+                        4. Repetitiv
+                    </button>
+                </div>
+            </div>
+
+            <!-- Zona de conținut teoretic flexibilă -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 shadow-xl backdrop-blur-sm flex-1 overflow-y-auto max-h-[750px]" id="theory-scroll-container">
+                
+                <!-- MODULE 0: IDE -->
+                <div id="t-ide" class="theory-view space-y-4">
+                    <div class="border-b border-indigo-900/40 pb-3">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Modulul 0</span>
+                        <h3 class="text-lg font-bold text-white">Dezvoltarea aplicațiilor în C++</h3>
+                    </div>
+                    <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
+                        <p>Pentru a construi și executa un program scris în limbajul C++, parcurgem o serie de pași bine definiți:</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850">
+                                <span class="text-indigo-400 font-bold block mb-1">1. Editare Sursă</span>
+                                <p class="text-slate-400 text-[11px]">Scrierea instrucțiunilor folosind un editor de text. Fișierul rezultat are extensia <code class="text-pink-400">.cpp</code>.</p>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850">
+                                <span class="text-indigo-400 font-bold block mb-1">2. Compilare</span>
+                                <p class="text-slate-400 text-[11px]">Compilatorul verifică sintaxa codului. Dacă nu există erori, codul este tradus în cod mașină (obiect).</p>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850">
+                                <span class="text-indigo-400 font-bold block mb-1">3. Executare</span>
+                                <p class="text-slate-400 text-[11px]">Rularea programului rezultat de către sistemul de operare pentru a obține rezultatele.</p>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850">
+                                <span class="text-indigo-400 font-bold block mb-1">4. Testare & Depanare</span>
+                                <p class="text-slate-400 text-[11px]">Verificarea corectitudinii cu diverse seturi de date și izolarea/corectarea eventualelor erori logice.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-indigo-950/20 border border-indigo-500/20 p-4 rounded-xl mt-3">
+                            <h4 class="font-bold text-indigo-300 text-xs uppercase tracking-wider mb-2">Medii de Lucru utilizate la clasă:</h4>
+                            <p class="mb-2"><strong class="text-white font-semibold">Code::Blocks:</strong> IDE gratuit, offline. Recomandat: descărcarea kitului <code class="text-amber-400">codeblocks-20.03mingw-setup.exe</code>, care include compilatorul GCC.</p>
+                            <p><strong class="text-white font-semibold">OnlineGDB:</strong> Compilator online ideal pentru acces rapid direct din browser, la adresa <a href="https://www.onlinegdb.com" target="_blank" class="text-sky-400 underline hover:text-sky-300 font-semibold">onlinegdb.com</a>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODULE 1: VOCABULAR & TIPURI -->
+                <div id="t-vocab" class="theory-view hidden space-y-4">
+                    <div class="border-b border-indigo-900/40 pb-3">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Modulul 1</span>
+                        <h3 class="text-lg font-bold text-white">Vocabularul, Structura și Tipurile de date</h3>
+                    </div>
+                    <div class="text-xs text-slate-300 space-y-4 leading-relaxed">
+                        
+                        <!-- Vocabular -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-2 border-l-2 border-indigo-500 pl-2">Setul de caractere & Identificatori</h4>
+                            <p class="text-slate-400 mb-2">Vocabularul cuprinde litere (A-Z, a-z), cifre (0-9), caractere speciale (<code class="text-slate-200">%, *, #, &</code>) și separatori (<code class="text-slate-200">spațiu, virgulă, punct și virgulă</code>).</p>
+                            <p class="text-slate-400"><strong class="text-white">Identificatorii:</strong> Sunt nume folosite pentru variabile, constante sau funcții. Ei trebuie să înceapă obligatoriu cu o literă sau caracterul underscore (<code class="text-indigo-300">_</code>), continuând cu litere, cifre sau underscore.</p>
+                        </div>
+
+                        <!-- Tipuri standard -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-850">
+                            <h4 class="font-bold text-indigo-400 text-xs mb-3">Tabel detaliat al tipurilor standard predefinite:</h4>
+                            <div class="overflow-x-auto text-[11px]">
+                                <table class="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr class="border-b border-slate-800 text-slate-400">
+                                            <th class="pb-2 font-semibold">Tip</th>
+                                            <th class="pb-2 font-semibold">Memorie</th>
+                                            <th class="pb-2 font-semibold">Interval / Valori admise</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-900 text-slate-300">
+                                        <tr><td class="py-1.5 font-mono text-white">char</td><td class="py-1.5">1 octet</td><td>Caractere cu codul ASCII în [0, 255]</td></tr>
+                                        <tr><td class="py-1.5 font-mono text-white">short int</td><td class="py-1.5">2 octeți</td><td>[-32.768, 32.767]</td></tr>
+                                        <tr><td class="py-1.5 font-mono text-white">int</td><td class="py-1.5">4 octeți</td><td>[-2.147.483.648, 2.147.483.647]</td></tr>
+                                        <tr><td class="py-1.5 font-mono text-white">unsigned int</td><td class="py-1.5">4 octeți</td><td>[0, 4.294.967.295]</td></tr>
+                                        <tr><td class="py-1.5 font-mono text-white">long long</td><td class="py-1.5">8 octeți</td><td>Întregi pe 64 de biți (valori extrem de mari)</td></tr>
+                                        <tr><td class="py-1.5 font-mono text-white">float</td><td class="py-1.5">4 octeți</td><td>Reale (zecimale cu precizie simplă)</td></tr>
+                                        <tr><td class="py-1.5 font-mono text-white">double</td><td class="py-1.5">8 octeți</td><td>Reale cu precizie dublă</td></tr>
+                                        <tr><td class="py-1.5 font-mono text-white">void</td><td class="py-1.5">-</td><td>Tip neprecizat (folosit pentru funcții fără return)</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Constante si Declaratii -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-2 border-l-2 border-indigo-500 pl-2">Constante & Declararea Variabilelor</h4>
+                            <p class="text-slate-400 mb-2">Constantele pot fi <strong class="text-white">literale</strong> (ex: <code class="text-slate-200">123</code>, <code class="text-slate-200">012</code> (baza 8, prefix 0), <code class="text-slate-200">0x1A</code> (baza 16, prefix 0x), <code class="text-slate-200">'A'</code>, <code class="text-slate-200">"șir"</code>) sau <strong class="text-white">simbolice</strong> (folosind cuvântul-cheie <code class="text-indigo-400">const</code>).</p>
+                            <pre class="bg-slate-950 p-3 rounded-xl border border-slate-850 text-indigo-300 font-mono text-[10px] space-y-1"><code>int x = 10, y; // Declarare variabile
+const float PI = 3.1415; // Constantă simbolică
+typedef int INTREG; // Crearea unui tip definit de utilizator
+INTREG a, b; // Variabile de tipul personalizat INTREG</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODULE 2: OPERATORI DETALIAT -->
+                <div id="t-ops" class="theory-view hidden space-y-4">
+                    <div class="border-b border-indigo-900/40 pb-3">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Modulul 2</span>
+                        <h3 class="text-lg font-bold text-white">Operatori C++ în detaliu</h3>
+                    </div>
+                    <div class="text-xs text-slate-300 space-y-4 leading-relaxed">
+                        
+                        <!-- Aritmetici -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-1.5 border-l-2 border-indigo-500 pl-2">1. Operatori Aritmetici</h4>
+                            <p class="text-slate-400 mb-2">Efectuează operații de calcul matematic:</p>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300 bg-slate-950 p-2.5 rounded-lg border border-slate-850 font-mono text-[11px]">
+                                <li><code class="text-indigo-400">+ , - , *</code> : Adunare, scădere, înmulțire.</li>
+                                <li><code class="text-indigo-400">/</code> : Împărțire întreagă (dacă ambii operanzi sunt întregi: <code class="text-white">13 / 3 => 4</code>) sau reală (<code class="text-white">13.0 / 3 => 4.33</code>).</li>
+                                <li><code class="text-indigo-400">%</code> : Restul împărțirii întregi (exclusiv pentru întregi: <code class="text-white">13 % 3 => 1</code>).</li>
+                                <li><code class="text-indigo-400">++ , --</code> : Incrementare/decrementare unară. <strong class="text-white">++a</strong> (prefixat, mărește valoarea înainte de evaluare) sau <strong class="text-white">a++</strong> (postfixat, folosește valoarea curentă în expresie, apoi mărește).</li>
+                            </ul>
+                        </div>
+
+                        <!-- Conversia explicita -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-1.5 border-l-2 border-indigo-500 pl-2">2. Conversie Explicită (Cast)</h4>
+                            <p class="text-slate-400 mb-1">Sintaxă: <code class="text-indigo-400 font-mono">(tip_data)operand</code>. Util pentru a forța împărțirea reală a doi întregi:</p>
+                            <pre class="bg-slate-950 p-2 rounded text-slate-300 font-mono text-[10px]"><code>int a = 9, b = 6;
+float ma = (float)(a + b) / 2; // Valoarea va fi 7.5, în loc de 7</code></pre>
+                        </div>
+
+                        <!-- Relationali si Logici -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-1.5 border-l-2 border-indigo-500 pl-2">3. Operatori Relaționali & Logici</h4>
+                            <p class="text-slate-400 mb-2">Valoarea de adevăr în C++ este reprezentată prin <strong class="text-white">0 pentru Fals</strong> și <strong class="text-white">orice valoare diferită de 0 pentru Adevărat</strong> (implicit 1).</p>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-300 bg-slate-950 p-2.5 rounded-lg border border-slate-850 text-[11px]">
+                                <li><strong class="text-white">Relaționali:</strong> <code class="text-indigo-300 font-mono">&gt;, &gt;=, &lt;, &lt;=, ==</code> (egalitate), <code class="text-indigo-300 font-mono">!=</code> (diferit). Ex: <code class="text-slate-300 font-mono">6 == 6 => 1 (Adevărat)</code>.</li>
+                                <li><strong class="text-white">Logici:</strong> <code class="text-indigo-300 font-mono">&amp;&amp;</code> (ȘI logic - adevărat doar dacă ambii sunt adevărați), <code class="text-indigo-300 font-mono">||</code> (SAU logic - adevărat dacă cel puțin unul e adevărat), <code class="text-indigo-300 font-mono">!</code> (negație).</li>
+                            </ul>
+                        </div>
+
+                        <!-- Biți -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-1.5 border-l-2 border-indigo-500 pl-2">4. Operatori pe Biți (Bitwise)</h4>
+                            <p class="text-slate-400 mb-1">Efectuează operații direct pe biții numerelor întregi:</p>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300 bg-slate-950 p-2 rounded-lg border border-slate-850 font-mono text-[11px]">
+                                <li><code class="text-indigo-400">&amp;</code> ȘI pe biți | <code class="text-indigo-400">|</code> SAU pe biți | <code class="text-indigo-400">^</code> XOR (SAU exclusiv)</li>
+                                <li><code class="text-indigo-400">~</code> Negație pe biți (unar)</li>
+                                <li><code class="text-indigo-400">&lt;&lt;</code> Deplasare la stânga (înmulțire cu $2^n$)</li>
+                                <li><code class="text-indigo-400">&gt;&gt;</code> Deplasare la dreapta (împărțire întreagă cu $2^n$)</li>
+                            </ul>
+                        </div>
+
+                        <!-- Atribuire si Conditional -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-1.5 border-l-2 border-indigo-500 pl-2">5. Atribuire & Operatorul Condițional</h4>
+                            <p class="text-slate-400 mb-2"><strong class="text-white">Atribuiri compuse:</strong> <code class="text-indigo-300 font-mono">+=, -=, *=, /=, %=</code> (ex: <code class="text-slate-300 font-mono">a += 5</code> înseamnă <code class="text-slate-300 font-mono">a = a + 5</code>).</p>
+                            <p class="text-slate-400 mb-2"><strong class="text-white">Operatorul Condițional (Ternar):</strong> singurul operator cu 3 operanzi în C++.</p>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-850 space-y-1">
+                                <span class="text-[10px] uppercase font-bold text-slate-500">Sintaxă:</span>
+                                <code class="text-pink-400 font-mono block text-[11px]">expresie1 ? expresie2 : expresie3</code>
+                                <span class="text-[10px] uppercase font-bold text-slate-500 block pt-1">Funcționare:</span>
+                                <p class="text-slate-400 text-[11px]">Se evaluează <code class="text-slate-200">expresie1</code>. Dacă este adevărată, se returnează <code class="text-slate-200">expresie2</code>. Altfel, se execută și se returnează <code class="text-slate-200">expresie3</code>.</p>
+                                <p class="text-slate-400 text-[11px] font-semibold mt-1">Exemplu: <code class="text-emerald-400 font-mono">min = (a < b) ? a : b;</code></p>
+                            </div>
+                        </div>
+
+                        <!-- Prioritati -->
+                        <div>
+                            <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-1.5 border-l-2 border-indigo-500 pl-2">6. Tabel de Prioritate (Precedență)</h4>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-850 text-[10px] font-mono space-y-1 text-slate-400">
+                                <div class="flex justify-between border-b border-slate-900 pb-1 text-white font-bold"><span>Prioritate</span> <span>Operatori</span> <span>Asociativitate</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">1 (Maximă)</span> <span>::</span> <span>Nu are</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">2</span> <span>() [] . -> postfixat(++, --)</span> <span>Stânga -> Dreapta</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">3</span> <span>prefixat(++, --) ! ~ sizeof cast unari</span> <span>Dreapta -> Stânga</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">5</span> <span>* / % (multiplicativi)</span> <span>Stânga -> Dreapta</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">6</span> <span>+ - (aditivi)</span> <span>Stânga -> Dreapta</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">8</span> <span>&lt; &lt;= &gt; &gt;= (relaționali)</span> <span>Stânga -> Dreapta</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">9</span> <span>== != (egalitate)</span> <span>Stânga -> Dreapta</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">13-14</span> <span>&& || (logici)</span> <span>Stânga -> Dreapta</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">15</span> <span>?: (ternar)</span> <span>Dreapta -> Stânga</span></div>
+                                <div class="flex justify-between border-b border-slate-900 py-0.5"><span class="text-indigo-400">16</span> <span>= += -= *= /= %= (atribuiri)</span> <span>Dreapta -> Stânga</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- MODULE 3: INSTRUCTIUNI ALTERNATIVE -->
+                <div id="t-alt" class="theory-view hidden space-y-4">
+                    <div class="border-b border-indigo-900/40 pb-3">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Modulul 3</span>
+                        <h3 class="text-lg font-bold text-white">Instrucțiuni de control: Structuri Alternative</h3>
+                    </div>
+                    <div class="text-xs text-slate-300 space-y-4 leading-relaxed">
+                        
+                        <!-- if -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-2">
+                            <h4 class="font-bold text-indigo-400 text-xs uppercase tracking-wider">1. Instrucțiunea <code class="text-white font-mono">if</code> (Alternativa Simplă)</h4>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block">Sintaxă:</span>
+                            <pre class="bg-slate-900 p-2.5 rounded font-mono text-[10px] text-slate-300"><code>if (expresie) {
+    instructiune1;
+} else {
+    instructiune2;
+}</code></pre>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block pt-1">Execuție:</span>
+                            <p class="text-slate-400 text-[11px]">Se evaluează <code class="text-slate-200">expresie</code>. Dacă valoarea sa este adevărată (diferită de zero), se execută <code class="text-slate-200">instructiune1</code>. Altfel, dacă există ramura <code class="text-slate-200">else</code>, se execută <code class="text-slate-200">instructiune2</code>.</p>
+                            
+                            <div class="bg-indigo-950/20 p-2.5 rounded border border-indigo-500/20 text-[11px]">
+                                <strong class="text-white">⚠️ Capcană:</strong> Nu adăugați punct și virgulă după paranteza rotundă a if-ului: <code class="text-pink-400 font-mono">if(conditie);</code>. Blocul următor s-ar executa necondiționat deoarece compilatorul consideră că instrucțiunea din if este cea vidă.
+                            </div>
+
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block pt-1">Exemplu:</span>
+                            <pre class="bg-slate-900 p-2 rounded font-mono text-[10px] text-emerald-400"><code>if (n % 2 == 0) {
+    cout << "Par";
+} else {
+    cout << "Impar";
+}</code></pre>
+                        </div>
+
+                        <!-- switch -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-2">
+                            <h4 class="font-bold text-indigo-400 text-xs uppercase tracking-wider">2. Instrucțiunea <code class="text-white font-mono">switch</code> (Alternativa Generalizată)</h4>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block">Sintaxă:</span>
+                            <pre class="bg-slate-900 p-2.5 rounded font-mono text-[10px] text-slate-300"><code>switch (expresie_intreg) {
+    case valoare1:
+        instructiune1;
+        [break;]
+    case valoare2:
+        instructiune2;
+        [break;]
+    default:
+        instructiune_default;
+}</code></pre>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block pt-1">Execuție:</span>
+                            <p class="text-slate-400 text-[11px]">Se evaluează expresia (care trebuie să returneze un tip întreg sau caracter). Se compară cu valorile din fiecare etichetă <code class="text-slate-200">case</code>. <strong class="text-white">Atenție!</strong> Dacă lipsește instrucțiunea <code class="text-pink-400 font-semibold">break;</code>, execuția continuă secvențial prin următoarele etichete case!</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- MODULE 4: INSTRUCTIUNI REPETITIVE -->
+                <div id="t-rep" class="theory-view hidden space-y-4">
+                    <div class="border-b border-indigo-900/40 pb-3">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Modulul 4</span>
+                        <h3 class="text-lg font-bold text-white">Instrucțiuni repetitive (Bucle)</h3>
+                    </div>
+                    <div class="text-xs text-slate-300 space-y-4 leading-relaxed">
+                        
+                        <!-- while -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-2">
+                            <h4 class="font-bold text-indigo-400 text-xs uppercase tracking-wider">1. Instrucțiunea <code class="text-white font-mono">while</code> (Test Inițial)</h4>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block">Sintaxă:</span>
+                            <pre class="bg-slate-900 p-2.5 rounded font-mono text-[10px] text-slate-300"><code>while (expresie) {
+    instructiune;
+}</code></pre>
+                            <p class="text-slate-400 text-[11px]">Se testează condiția înainte de fiecare iterație. Dacă expresia este inițial falsă (0), corpul buclei nu se execută niciodată.</p>
+                        </div>
+
+                        <!-- do-while -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-2">
+                            <h4 class="font-bold text-indigo-400 text-xs uppercase tracking-wider">2. Instrucțiunea <code class="text-white font-mono">do-while</code> (Test Final)</h4>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block">Sintaxă:</span>
+                            <pre class="bg-slate-900 p-2.5 rounded font-mono text-[10px] text-slate-300"><code>do {
+    instructiune;
+} while (expresie);</code></pre>
+                            <p class="text-slate-400 text-[11px]"><strong class="text-indigo-400 font-semibold">💡 Pro-Tip:</strong> Garantează întotdeauna <strong class="text-white">cel puțin o executare</strong> a corpului buclei, deoarece condiția este evaluată după rularea blocului de instrucțiuni.</p>
+                        </div>
+
+                        <!-- for -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 space-y-2">
+                            <h4 class="font-bold text-indigo-400 text-xs uppercase tracking-wider">3. Instrucțiunea <code class="text-white font-mono">for</code> (Cu Pas/Contor)</h4>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block">Sintaxă:</span>
+                            <pre class="bg-slate-900 p-2.5 rounded font-mono text-[10px] text-slate-300"><code>for (exp_init; exp_test; exp_inc) {
+    instructiune;
+}</code></pre>
+                            <p class="text-slate-400 text-[11px]">Se execută expresia de inițializare, apoi se verifică testul. După fiecare iterație se execută expresia de incrementare, reevaluând testul.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- Coloana Dreaptă: Workspace-ul Interactiv al Simulatorului -->
+        <main class="lg:col-span-7 flex flex-col gap-6">
+            
+            <!-- Selectorul de Algoritmi & Inputuri -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 shadow-xl backdrop-blur-sm flex flex-col gap-4">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-sm font-extrabold text-white flex items-center gap-2 uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
+                            Simulator Didactic Avansat
+                        </h2>
+                        <p class="text-xs text-slate-400 font-sans">Alege una din problemele de mai jos pentru a o urmări pas-cu-pas</p>
+                    </div>
+
+                    <!-- Selector Algoritm -->
+                    <select id="algo-selector" class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all w-full md:w-auto">
+                        <option value="suma_n">1. Citirea a N numere și suma lor</option>
+                        <option value="media_pare">2. N numere și media aritmetică a celor pare</option>
+                        <option value="fibonacci">3. Șirul lui Fibonacci (N termeni)</option>
+                        <option value="palindrom">4. Verificare număr palindrom</option>
+                        <option value="prim">5. Verificare număr prim</option>
+                        <option value="suma_div">6. Suma divizorilor (varianta eficientă O(√N))</option>
+                        <option value="fact_primi">7. Descompunerea în factori primi</option>
+                        <option value="baza_num">8. Schimbarea bazei de numerație (Zecimal -> Baza B)</option>
+                        <option value="numara_prime">9. N numere - Numărare elemente prime</option>
+                        <option value="numara_palindroame">10. N numere - Numărare palindroame</option>
+                        <option value="suma_patrate">11. N numere - Suma celor care sunt pătrate perfecte</option>
+                        <option value="numara_perfecte">12. N numere - Numărare elemente perfecte</option>
+                    </select>
+                </div>
+
+                <!-- Inputuri dinamice în funcție de algoritm -->
+                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+                    <div id="container-input-1">
+                        <label id="lbl-input-1" class="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5">Variabilă:</label>
+                        <input type="number" id="val-input-1" value="5" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-1.5 text-xs text-white font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div id="container-input-2">
+                        <label id="lbl-input-2" class="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5">Șir de numere (separate prin virgulă):</label>
+                        <input type="text" id="val-input-2" value="12, 5, 8, 3, 20" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-1.5 text-xs text-white font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <!-- Panou Control Simulare -->
+                <div class="flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80 pt-3">
+                    <div class="flex items-center gap-2">
+                        <button id="btn-reset" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1.5">
+                            🔄 Reset
+                        </button>
+                        <button id="btn-step" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs px-5 py-2 rounded-xl shadow-lg shadow-indigo-900/30 transition-all flex items-center gap-1.5">
+                            ➡️ Pasul Următor
+                        </button>
+                        <button id="btn-auto" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-5 py-2 rounded-xl shadow-lg shadow-emerald-900/30 transition-all flex items-center gap-1.5">
+                            ▶️ Rulare Auto
+                        </button>
+                    </div>
+
+                    <!-- Slider Viteza -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] text-slate-500 uppercase font-semibold">Timp pas:</span>
+                        <input type="range" id="speed-slider" min="300" max="2500" value="1000" step="100" class="accent-indigo-500 bg-slate-800 h-1 rounded-lg cursor-pointer w-20">
+                        <span id="speed-label" class="text-xs text-indigo-400 font-bold font-mono">1.0s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stări Memorie, Explicații & Consolă de Sistem -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                
+                <!-- Memorie RAM Virtuală -->
+                <div class="md:col-span-4 bg-slate-900/60 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col gap-3">
+                    <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-2 flex items-center justify-between">
+                        <span>Valori Memorie</span>
+                        <span class="bg-slate-800 text-indigo-400 font-mono text-[9px] px-1.5 py-0.5 rounded">RAM</span>
+                    </h3>
+                    <div id="memory-variables" class="flex-1 flex flex-col gap-2 justify-center">
+                        <!-- Generat dinamic -->
+                    </div>
+                </div>
+
+                <!-- Explicații Pas Curent & Consolă -->
+                <div class="md:col-span-8 bg-slate-900/60 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col gap-3">
+                    <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-2">Status & Explicația Pasului</h3>
+                    <div class="flex-1 flex flex-col justify-between gap-2.5">
+                        <p id="step-explanation" class="text-xs text-slate-200 italic leading-relaxed">Apasă pe "Pasul Următor" sau "Rulare Auto" pentru a porni programul.</p>
+                        
+                        <div class="bg-black/40 border border-slate-800/80 rounded-xl p-3">
+                            <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest block mb-1">🖥️ Consolă Virtuală Ieșire (Screen Output)</span>
+                            <div id="console-output" class="text-xs text-emerald-300 font-mono min-h-[25px] flex items-center">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Cod Sursă sincronizate (Pseudocod, C++, Python) -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+                    <div class="flex gap-1.5">
+                        <button onclick="switchTab('pseudocode')" id="tab-pseudocode" class="code-tab-btn px-3 py-1 text-xs font-semibold rounded-lg bg-indigo-950/40 text-indigo-400 border border-indigo-500/30 transition-all">
+                            Pseudocod
+                        </button>
+                        <button onclick="switchTab('cpp')" id="tab-cpp" class="code-tab-btn px-3 py-1 text-xs font-medium rounded-lg text-slate-400 hover:text-white transition-all">
+                            Cod C++
+                        </button>
+                        <button onclick="switchTab('python')" id="tab-python" class="code-tab-btn px-3 py-1 text-xs font-medium rounded-lg text-slate-400 hover:text-white transition-all">
+                            Echivalent Python
+                        </button>
+                    </div>
+                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Sintaxă Sincronizată</span>
+                </div>
+
+                <div class="bg-slate-950 rounded-xl border border-slate-850 p-4 overflow-hidden relative">
+                    <div id="code-pseudocode" class="code-block-content text-[11px] text-slate-300 leading-relaxed font-mono whitespace-pre overflow-x-auto"></div>
+                    <div id="code-cpp" class="code-block-content hidden text-[11px] text-slate-300 leading-relaxed font-mono whitespace-pre overflow-x-auto"></div>
+                    <div id="code-python" class="code-block-content hidden text-[11px] text-slate-300 leading-relaxed font-mono whitespace-pre overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- Tabelul de Rulare (Trace Table) -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-3 mb-3">📋 Tabel de Rulare (Trace Table)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="border-b border-slate-800 bg-slate-950/40" id="trace-header">
+                                <!-- Generat dinamic -->
+                            </tr>
+                        </thead>
+                        <tbody id="trace-table-body" class="divide-y divide-slate-850 text-slate-300">
+                            <!-- Completat dinamic pas cu pas -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-4 px-6 text-center text-xs text-slate-500">
+        <p>Aplicație de laborator interactivă pentru studiul algoritmilor de bază în clasa a X-a. Prof. Alina Cîlţan © 2026</p>
+    </footer>
+
+    <!-- Logică Simulator pentru toți cei 12 algoritmi -->
+    <script>
+        // Helpers pentru algoritmi
+        function isPrime(num) {
+            if (num < 2) return false;
+            for (let i = 2; i * i <= num; i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function isPalindrome(num) {
+            if (num < 0) return false;
+            let temp = num, rev = 0;
+            while (temp > 0) {
+                rev = rev * 10 + (temp % 10);
+                temp = Math.floor(temp / 10);
+            }
+            return num === rev;
+        }
+
+        function isPerfectSquare(num) {
+            if (num < 0) return false;
+            let r = Math.round(Math.sqrt(num));
+            return r * r === num;
+        }
+
+        function isPerfect(num) {
+            if (num < 2) return false;
+            let sum = 1;
+            for (let i = 2; i * i <= num; i++) {
+                if (num % i === 0) {
+                    sum += i;
+                    if (i * i !== num) sum += num / i;
+                }
+            }
+            return sum === num;
+        }
+
+        // Definire Algoritmi
+        const ALGORITHMS = {
+            suma_n: {
+                name: "1. Citirea a N numere și suma lor",
+                inputs: [
+                    { id: "n", name: "Numărul de elemente (N):", default: 4 },
+                    { id: "vals", name: "Șirul de elemente (separate prin virgulă):", default: "5, 11, 4, 8" }
+                ],
+                variables: ["n", "i", "x", "s"],
+                pseudocode:
+`citește n
+s <- 0
+┌ pentru i <- 1, n execută
+│   citește x
+│   s <- s + x
+└■
+scrie s`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int n, s, x;
+    cin >> n;
+    s = 0;
+    for (int i = 1; i <= n; i++) {
+        cin >> x;
+        s = s + x;
+    }
+    cout << "suma=" << s;
+    return 0;
+}`,
+                python:
+`n = int(input())
+s = 0
+for i in range(1, n + 1):
+    x = int(input())
+    s = s + x
+print(f"suma={s}")`,
+                getSteps: (inputs) => {
+                    const n = parseInt(inputs[0]) || 0;
+                    const rawVals = inputs[1].split(',').map(v => parseInt(v.trim()) || 0);
+                    const steps = [];
+                    let s = "-";
+                    let x = "-";
+                    let i = "-";
+                    steps.push({ label: "START", state: { n, s, i, x }, exp: "START: Inițiem calculul sumei.", codeLine: 1 });
+                    steps.push({ label: "Citire n", state: { n, s, i, x }, exp: `Se citește valoarea N = ${n}`, codeLine: 2 });
+                    s = 0;
+                    steps.push({ label: "Inițializare s=0", state: { n, s, i, x }, exp: "Setăm suma inițială s = 0", codeLine: 3 });
+                    
+                    for (let stepI = 1; stepI <= n; stepI++) {
+                        i = stepI;
+                        x = rawVals[stepI - 1] !== undefined ? rawVals[stepI - 1] : 0;
+                        steps.push({ label: `Pas i = ${i}`, state: { n, s, i, x: "-" }, exp: `Suntem la iterația i = ${i} din ${n}.`, codeLine: 4 });
+                        steps.push({ label: "Citire x", state: { n, s, i, x }, exp: `Se citește elementul curent x = ${x}`, codeLine: 5 });
+                        s += x;
+                        steps.push({ label: "Adunare x la s", state: { n, s, i, x }, exp: `Adunăm x la s: s = s + ${x} => s = ${s}`, codeLine: 6 });
+                    }
+                    steps.push({ label: "Afișare rezultat", state: { n, s, i: "-", x: "-" }, exp: `Afișăm suma totală calculată: ${s}`, codeLine: 8, out: `suma=${s}` });
+                    steps.push({ label: "STOP", state: { n, s, i: "-", x: "-" }, exp: "STOP: Algoritm încheiat.", codeLine: 9, out: `suma=${s}` });
+                    return steps;
+                }
+            },
+            media_pare: {
+                name: "2. N numere și media aritmetică a celor pare",
+                inputs: [
+                    { id: "n", name: "Numărul de elemente (N):", default: 4 },
+                    { id: "vals", name: "Șirul de elemente (separate prin virgulă):", default: "2, 5, 8, 11" }
+                ],
+                variables: ["n", "i", "x", "sum_pare", "nr_pare", "medie"],
+                pseudocode:
+`citește n
+sum_pare <- 0
+nr_pare <- 0
+┌ pentru i <- 1, n execută
+│   citește x
+│ ┌ dacă x % 2 = 0 atunci
+│ │   sum_pare <- sum_pare + x
+│ │   nr_pare <- nr_pare + 1
+│ └■
+└■
+┌ dacă nr_pare > 0 atunci
+│   medie <- sum_pare / nr_pare
+│   scrie medie
+│ altfel
+│   scrie "Nu există numere pare"
+└■`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int n, x, sum_pare = 0, nr_pare = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> x;
+        if (x % 2 == 0) {
+            sum_pare += x;
+            nr_pare++;
+        }
+    }
+    if (nr_pare > 0) {
+        float medie = (float)sum_pare / nr_pare;
+        cout << "medie=" << medie;
+    } else {
+        cout << "Nu exista numere pare";
+    }
+    return 0;
+}`,
+                python:
+`n = int(input())
+sum_pare = 0
+nr_pare = 0
+for i in range(1, n + 1):
+    x = int(input())
+    if x % 2 == 0:
+        sum_pare += x
+        nr_pare += 1
+if nr_pare > 0:
+    medie = sum_pare / nr_pare
+    print(f"medie={medie}")
+else:
+    print("Nu exista numere pare")`,
+                getSteps: (inputs) => {
+                    const n = parseInt(inputs[0]) || 0;
+                    const rawVals = inputs[1].split(',').map(v => parseInt(v.trim()) || 0);
+                    const steps = [];
+                    let sum_pare = "-";
+                    let nr_pare = "-";
+                    let i = "-";
+                    let x = "-";
+                    let medie = "-";
+                    
+                    steps.push({ label: "START", state: { n, i, x, sum_pare, nr_pare, medie }, exp: "START", codeLine: 1 });
+                    sum_pare = 0;
+                    nr_pare = 0;
+                    steps.push({ label: "Inițializări", state: { n, i, x, sum_pare, nr_pare, medie }, exp: "Inițializăm sum_pare = 0 și nr_pare = 0", codeLine: 3 });
+                    
+                    for (let stepI = 1; stepI <= n; stepI++) {
+                        i = stepI;
+                        x = rawVals[stepI - 1] !== undefined ? rawVals[stepI - 1] : 0;
+                        steps.push({ label: `Pas i = ${i}`, state: { n, i, x: "-", sum_pare, nr_pare, medie }, exp: `Verificăm elementul i = ${i}`, codeLine: 4 });
+                        steps.push({ label: "Citire x", state: { n, i, x, sum_pare, nr_pare, medie }, exp: `Am citit x = ${x}`, codeLine: 5 });
+                        
+                        let ePar = (x % 2 === 0);
+                        steps.push({ label: "Test x % 2 == 0", state: { n, i, x, sum_pare, nr_pare, medie }, exp: `Verificăm dacă ${x} este par: ${ePar ? "DA" : "NU"}`, codeLine: 6 });
+                        if (ePar) {
+                            sum_pare += x;
+                            nr_pare++;
+                            steps.push({ label: "Actualizare sumă și contor", state: { n, i, x, sum_pare, nr_pare, medie }, exp: `Adăugăm x la sumă: sum_pare = ${sum_pare}, nr_pare = ${nr_pare}`, codeLine: 7 });
+                        }
+                    }
+                    
+                    steps.push({ label: "Test nr_pare > 0", state: { n, i: "-", x: "-", sum_pare, nr_pare, medie }, exp: `S-au găsit pare? nr_pare = ${nr_pare}`, codeLine: 11 });
+                    if (nr_pare > 0) {
+                        medie = (sum_pare / nr_pare).toFixed(2);
+                        steps.push({ label: "Calcul medie", state: { n, i: "-", x: "-", sum_pare, nr_pare, medie }, exp: `Calculăm media: sum_pare / nr_pare => ${sum_pare} / ${nr_pare} = ${medie}`, codeLine: 12 });
+                        steps.push({ label: "Scriere medie", state: { n, i: "-", x: "-", sum_pare, nr_pare, medie }, exp: `Afișăm media pare: ${medie}`, codeLine: 13, out: `medie=${medie}` });
+                    } else {
+                        steps.push({ label: "Nu există pare", state: { n, i: "-", x: "-", sum_pare, nr_pare, medie: "-" }, exp: "Afișăm mesaj de lipsă numere pare.", codeLine: 15, out: "Nu exista numere pare" });
+                    }
+                    steps.push({ label: "STOP", state: { n, i: "-", x: "-", sum_pare, nr_pare, medie }, exp: "STOP: Algoritm finalizat.", codeLine: 17 });
+                    return steps;
+                }
+            },
+            fibonacci: {
+                name: "3. Șirul lui Fibonacci (N termeni)",
+                inputs: [
+                    { id: "n", name: "Numărul de termeni (N):", default: 6 }
+                ],
+                variables: ["n", "f1", "f2", "f3", "i"],
+                pseudocode:
+`citește n
+f1 <- 1
+f2 <- 1
+scrie f1, f2
+┌ pentru i <- 3, n execută
+│   f3 <- f1 + f2
+│   scrie f3
+│   f1 <- f2
+│   f2 <- f3
+└■`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int n, f1 = 1, f2 = 1, f3;
+    cin >> n;
+    if (n >= 1) cout << f1 << " ";
+    if (n >= 2) cout << f2 << " ";
+    for (int i = 3; i <= n; i++) {
+        f3 = f1 + f2;
+        cout << f3 << " ";
+        f1 = f2;
+        f2 = f3;
+    }
+    return 0;
+}`,
+                python:
+`n = int(input())
+f1, f2 = 1, 1
+if n >= 1:
+    print(f1, end=" ")
+if n >= 2:
+    print(f2, end=" ")
+for i in range(3, n + 1):
+    f3 = f1 + f2
+    print(f3, end=" ")
+    f1 = f2
+    f2 = f3`,
+                getSteps: (inputs) => {
+                    const n = parseInt(inputs[0]) || 0;
+                    const steps = [];
+                    let f1 = "-";
+                    let f2 = "-";
+                    let f3 = "-";
+                    let i = "-";
+                    let outAccum = [];
+
+                    steps.push({ label: "START", state: { n, f1, f2, f3, i }, exp: "START Fibonacci", codeLine: 1 });
+                    f1 = 1; f2 = 1;
+                    steps.push({ label: "Inițializare termeni", state: { n, f1, f2, f3, i }, exp: "Inițializăm f1 = 1, f2 = 1", codeLine: 3 });
+                    
+                    if (n >= 1) outAccum.push(1);
+                    if (n >= 2) outAccum.push(1);
+                    steps.push({ label: "Scriere primi termeni", state: { n, f1, f2, f3, i }, exp: `Afișăm f1 și f2: ${outAccum.join(" ")}`, codeLine: 4, out: outAccum.join(" ") });
+                    
+                    for (let stepI = 3; stepI <= n; stepI++) {
+                        i = stepI;
+                        f3 = f1 + f2;
+                        steps.push({ label: `Calcul f3 (i = ${i})`, state: { n, f1, f2, f3, i }, exp: `Calculăm următorul termen: f3 = f1 + f2 => ${f1} + ${f2} = ${f3}`, codeLine: 6 });
+                        outAccum.push(f3);
+                        steps.push({ label: "Scriere f3", state: { n, f1, f2, f3, i }, exp: `Afișăm termenul f3: ${f3}`, codeLine: 7, out: outAccum.join(" ") });
+                        f1 = f2;
+                        steps.push({ label: "Glisare f1", state: { n, f1, f2, f3, i }, exp: `f1 ia valoarea lui f2 => f1 = ${f1}`, codeLine: 8, out: outAccum.join(" ") });
+                        f2 = f3;
+                        steps.push({ label: "Glisare f2", state: { n, f1, f2, f3, i }, exp: `f2 ia valoarea lui f3 => f2 = ${f2}`, codeLine: 9, out: outAccum.join(" ") });
+                    }
+                    steps.push({ label: "STOP", state: { n, f1, f2, f3: "-", i: "-" }, exp: "STOP: Algoritm finalizat.", codeLine: 11, out: outAccum.join(" ") });
+                    return steps;
+                }
+            },
+            palindrom: {
+                name: "4. Verificare număr palindrom",
+                inputs: [
+                    { id: "num", name: "Numărul de verificat (N):", default: 121 }
+                ],
+                variables: ["num", "og", "copie", "cifra"],
+                pseudocode:
+`citește num
+copie <- num
+og <- 0
+┌ cât timp copie > 0 execută
+│   cifra <- copie % 10
+│   og <- og * 10 + cifra
+│   copie <- [copie / 10]
+└■
+┌ dacă og = num atunci
+│   scrie "Este palindrom"
+│ altfel
+│   scrie "Nu este palindrom"
+└■`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int num, og = 0, copie;
+    cin >> num;
+    copie = num;
+    while (copie > 0) {
+        int cifra = copie % 10;
+        og = og * 10 + cifra;
+        copie = copie / 10;
+    }
+    if (og == num) {
+        cout << "Este palindrom";
+    } else {
+        cout << "Nu este palindrom";
+    }
+    return 0;
+}`,
+                python:
+`num = int(input())
+copie = num
+og = 0
+while copie > 0:
+    cifra = copie % 10
+    og = og * 10 + cifra
+    copie = copie // 10
+if og == num:
+    print("Este palindrom")
+else:
+    print("Nu este palindrom")`,
+                getSteps: (inputs) => {
+                    const num = parseInt(inputs[0]) || 0;
+                    const steps = [];
+                    let og = "-";
+                    let copie = "-";
+                    let cifra = "-";
+                    
+                    steps.push({ label: "START", state: { num, og, copie, cifra }, exp: "START verificare palindrom.", codeLine: 1 });
+                    copie = num;
+                    og = 0;
+                    steps.push({ label: "Inițializare copie și og", state: { num, og, copie, cifra }, exp: `copie = ${copie}, og = ${og}`, codeLine: 3 });
+                    
+                    while (copie > 0) {
+                        steps.push({ label: "Verificare buclă", state: { num, og, copie, cifra: "-" }, exp: `copie (${copie}) > 0 ? DA.`, codeLine: 5 });
+                        cifra = copie % 10;
+                        steps.push({ label: "Extragere cifră", state: { num, og, copie, cifra }, exp: `Cifra extrasă este ${cifra}`, codeLine: 6 });
+                        og = og * 10 + cifra;
+                        steps.push({ label: "Construire oglindit", state: { num, og, copie, cifra }, exp: `og = og * 10 + cifra => og = ${og}`, codeLine: 7 });
+                        copie = Math.floor(copie / 10);
+                        steps.push({ label: "Eliminare cifră", state: { num, og, copie, cifra }, exp: `copie = copie / 10 => ${copie}`, codeLine: 8 });
+                    }
+                    
+                    steps.push({ label: "Verificare finală", state: { num, og, copie, cifra: "-" }, exp: `Verificăm dacă og == num (${og} == ${num})`, codeLine: 10 });
+                    const isPal = (og === num);
+                    steps.push({
+                        label: isPal ? "Este palindrom" : "Nu este palindrom",
+                        state: { num, og, copie, cifra: "-" },
+                        exp: isPal ? "Este palindrom!" : "Nu este palindrom!",
+                        codeLine: isPal ? 11 : 13,
+                        out: isPal ? "Este palindrom" : "Nu este palindrom"
+                    });
+                    steps.push({ label: "STOP", state: { num, og, copie, cifra: "-" }, exp: "STOP", codeLine: 15, out: isPal ? "Este palindrom" : "Nu este palindrom" });
+                    return steps;
+                }
+            },
+            prim: {
+                name: "5. Verificare număr prim",
+                inputs: [
+                    { id: "num", name: "Numărul de verificat (N):", default: 17 }
+                ],
+                variables: ["num", "este_prim", "i"],
+                pseudocode:
+`citește num
+este_prim <- 1
+┌ dacă num < 2 atunci
+│   este_prim <- 0
+└■
+┌ pentru i <- 2, [num/2] execută
+│ ┌ dacă num % i = 0 atunci
+│ │   este_prim <- 0
+│ └■
+└■
+┌ dacă este_prim = 1 atunci
+│   scrie "Este prim"
+│ altfel
+│   scrie "Nu este prim"
+└■`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int num, este_prim = 1;
+    cin >> num;
+    if (num < 2) {
+        este_prim = 0;
+    }
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i === 0) {
+            este_prim = 0;
+            break;
+        }
+    }
+    if (este_prim == 1) {
+        cout << "Este prim";
+    } else {
+        cout << "Nu este prim";
+    }
+    return 0;
+}`,
+                python:
+`num = int(input())
+este_prim = 1
+if num < 2:
+    este_prim = 0
+for i in range(2, int(num**0.5) + 1):
+    if num % i == 0:
+        este_prim = 0
+        break
+if este_prim == 1:
+    print("Este prim")
+else:
+    print("Nu este prim")`,
+                getSteps: (inputs) => {
+                    const num = parseInt(inputs[0]) || 0;
+                    const steps = [];
+                    let este_prim = "-";
+                    let i = "-";
+                    
+                    steps.push({ label: "START", state: { num, este_prim, i }, exp: "START verificare prim.", codeLine: 1 });
+                    este_prim = 1;
+                    steps.push({ label: "Inițializare", state: { num, este_prim, i }, exp: "Presupunem inițial că numărul este prim (este_prim = 1)", codeLine: 2 });
+                    
+                    if (num < 2) {
+                        este_prim = 0;
+                        steps.push({ label: "Tratare caz < 2", state: { num, este_prim, i }, exp: `Deoarece num < 2, el nu este prim (este_prim = 0)`, codeLine: 4 });
+                    } else {
+                        const limit = Math.floor(Math.sqrt(num));
+                        for (let stepI = 2; stepI <= limit; stepI++) {
+                            i = stepI;
+                            steps.push({ label: `Pas i = ${i}`, state: { num, este_prim, i }, exp: `Verificăm divizibilitatea cu i = ${i}`, codeLine: 6 });
+                            if (num % i === 0) {
+                                este_prim = 0;
+                                steps.push({ label: "Divizor găsit", state: { num, este_prim, i }, exp: `Am găsit divizorul ${i}. Numărul nu este prim!`, codeLine: 8 });
+                                break;
+                            }
+                        }
+                    }
+                    
+                    const isPr = (este_prim === 1);
+                    steps.push({ label: "Verificare finală", state: { num, este_prim, i: "-" }, exp: `Verificăm starea semaforului 'este_prim': ${este_prim}`, codeLine: 11 });
+                    steps.push({
+                        label: isPr ? "Este prim" : "Nu este prim",
+                        state: { num, este_prim, i: "-" },
+                        exp: isPr ? "Este prim!" : "Nu este prim!",
+                        codeLine: isPr ? 12 : 14,
+                        out: isPr ? "Este prim" : "Nu este prim"
+                    });
+                    steps.push({ label: "STOP", state: { num, este_prim, i: "-" }, exp: "STOP", codeLine: 16, out: isPr ? "Este prim" : "Nu este prim" });
+                    return steps;
+                }
+            },
+            suma_div: {
+                name: "6. Suma divizorilor (varianta eficientă O(√N))",
+                inputs: [
+                    { id: "num", name: "Numărul (N):", default: 12 }
+                ],
+                variables: ["num", "suma", "i"],
+                pseudocode:
+`citește num
+suma <- 0
+┌ pentru i <- 1, [sqrt(num)] execută
+│ ┌ dacă num % i = 0 atunci
+│ │   suma <- suma + i
+│ │ ┌ dacă i != num/i atunci
+│ │ │   suma <- suma + num / i
+│ │ └■
+│ └■
+└■
+scrie suma`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int num, suma = 0;
+    cin >> num;
+    for (int i = 1; i * i <= num; i++) {
+        if (num % i == 0) {
+            suma += i;
+            if (i * i != num) {
+                suma += num / i;
+            }
+        }
+    }
+    cout << "suma_div=" << suma;
+    return 0;
+}`,
+                python:
+`import math
+num = int(input())
+suma = 0
+for i in range(1, int(math.sqrt(num)) + 1):
+    if num % i == 0:
+        suma += i
+        if i != num // i:
+            suma += num // i
+print(f"suma_div={suma}")`,
+                getSteps: (inputs) => {
+                    const num = parseInt(inputs[0]) || 1;
+                    const steps = [];
+                    let suma = "-";
+                    let i = "-";
+                    
+                    steps.push({ label: "START", state: { num, suma, i }, exp: "START", codeLine: 1 });
+                    suma = 0;
+                    steps.push({ label: "Inițializare", state: { num, suma, i }, exp: "Inițializăm suma = 0", codeLine: 2 });
+                    
+                    const limit = Math.floor(Math.sqrt(num));
+                    for (let stepI = 1; stepI <= limit; stepI++) {
+                        i = stepI;
+                        steps.push({ label: `Pas i = ${i}`, state: { num, suma, i }, exp: `Verificăm divizorul i = ${i}`, codeLine: 3 });
+                        if (num % i === 0) {
+                            suma += i;
+                            steps.push({ label: "Divizor găsit i", state: { num, suma, i }, exp: `Adăugăm divizorul i: suma devine ${suma}`, codeLine: 4 });
+                            
+                            let co_div = num / i;
+                            if (i !== co_div) {
+                                suma += co_div;
+                                steps.push({ label: "Pereche găsită", state: { num, suma, i }, exp: `Adăugăm și perechea sa (${co_div}): suma devine ${suma}`, codeLine: 5 });
+                            }
+                        }
+                    }
+                    steps.push({ label: "Afișare", state: { num, suma, i: "-" }, exp: `Suma totală a divizorilor este ${suma}`, codeLine: 10, out: `suma_div=${suma}` });
+                    steps.push({ label: "STOP", state: { num, suma, i: "-" }, exp: "STOP", codeLine: 11, out: `suma_div=${suma}` });
+                    return steps;
+                }
+            },
+            fact_primi: {
+                name: "7. Descompunerea în factori primi",
+                inputs: [
+                    { id: "num", name: "Numărul de descompus (N):", default: 60 }
+                ],
+                variables: ["num", "d", "p"],
+                pseudocode:
+`citește num
+d <- 2
+┌ cât timp num > 1 execută
+│   p <- 0
+│ ┌ cât timp num % d = 0 execută
+│ │   p <- p + 1
+│ │   num <- [num / d]
+│ └■
+│ ┌ dacă p > 0 atunci
+│ │   scrie d, "^", p
+│ └■
+│   d <- d + 1
+└■`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int num, d = 2, p;
+    cin >> num;
+    while (num > 1) {
+        p = 0;
+        while (num % d == 0) {
+            p++;
+            num = num / d;
+        }
+        if (p > 0) {
+            cout << d << "^" << p << " ";
+        }
+        d++;
+    }
+    return 0;
+}`,
+                python:
+`num = int(input())
+d = 2
+while num > 1:
+    p = 0
+    while num % d == 0:
+        p += 1
+        num = num // d
+    if p > 0:
+        print(f"{d}^{p}", end=" ")
+    d += 1`,
+                getSteps: (inputs) => {
+                    let num = parseInt(inputs[0]) || 1;
+                    const steps = [];
+                    let d = "-";
+                    let p = "-";
+                    let outAccum = [];
+                    
+                    steps.push({ label: "START", state: { num, d, p }, exp: "START descompunere.", codeLine: 1 });
+                    d = 2;
+                    steps.push({ label: "Inițializare divizor", state: { num, d, p }, exp: "Începem de la cel mai mic divizor prim: d = 2", codeLine: 2 });
+                    
+                    while (num > 1) {
+                        steps.push({ label: "Verificare num > 1", state: { num, d, p: "-" }, exp: `Verificăm dacă num (${num}) > 1`, codeLine: 3 });
+                        p = 0;
+                        steps.push({ label: "Resetare exponent", state: { num, d, p }, exp: `Setăm puterea p = 0 pentru factorul d = ${d}`, codeLine: 4 });
+                        
+                        let enteredSub = false;
+                        while (num % d === 0) {
+                            enteredSub = true;
+                            p++;
+                            num = Math.floor(num / d);
+                            steps.push({ label: `Împărțire cu ${d}`, state: { num, d, p }, exp: `num este divizibil cu ${d}. Împărțim num. Puterea devine p = ${p}`, codeLine: 6 });
+                        }
+                        
+                        if (p > 0) {
+                            outAccum.push(`${d}^${p}`);
+                            steps.push({ label: "Afișare factor", state: { num, d, p }, exp: `Am găsit factorul: ${d}^${p}`, codeLine: 9, out: outAccum.join(" ") });
+                        }
+                        d++;
+                        steps.push({ label: "Mărire d", state: { num, d, p: "-" }, exp: `Trecem la următorul divizor d = ${d}`, codeLine: 11, out: outAccum.join(" ") });
+                    }
+                    steps.push({ label: "STOP", state: { num, d: "-", p: "-" }, exp: "STOP: Descompunere finalizată.", codeLine: 13, out: outAccum.join(" ") });
+                    return steps;
+                }
+            },
+            baza_num: {
+                name: "8. Schimbarea bazei de numerație",
+                inputs: [
+                    { id: "num", name: "Numărul zecimal (N):", default: 13 },
+                    { id: "baza", name: "Baza dorită (B):", default: 2 }
+                ],
+                variables: ["num", "baza", "copie", "rezultat", "putere"],
+                pseudocode:
+`citește num, baza
+copie <- num
+rezultat <- 0
+putere <- 1
+┌ cât timp copie > 0 execută
+│   rezultat <- rezultat + (copie % baza) * putere
+│   putere <- putere * 10
+│   copie <- [copie / baza]
+└■
+scrie rezultat`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+int main() {
+    int num, baza, copie, rezultat = 0, putere = 1;
+    cin >> num >> baza;
+    copie = num;
+    while (copie > 0) {
+        rezultat += (copie % baza) * putere;
+        putere *= 10;
+        copie /= baza;
+    }
+    cout << "baza=" << rezultat;
+    return 0;
+}`,
+                python:
+`num = int(input())
+baza = int(input())
+copie = num
+rezultat = 0
+putere = 1
+while copie > 0:
+    rezultat += (copie % baza) * putere
+    putere *= 10
+    copie //= baza
+print(f"baza={rezultat}")`,
+                getSteps: (inputs) => {
+                    const num = parseInt(inputs[0]) || 0;
+                    const baza = parseInt(inputs[1]) || 2;
+                    const steps = [];
+                    let copie = "-";
+                    let rezultat = "-";
+                    let putere = "-";
+                    
+                    steps.push({ label: "START", state: { num, baza, copie, rezultat, putere }, exp: "START convertire bază.", codeLine: 1 });
+                    copie = num;
+                    rezultat = 0;
+                    putere = 1;
+                    steps.push({ label: "Inițializare", state: { num, baza, copie, rezultat, putere }, exp: `copie = ${copie}, rezultat = 0, putere = 1`, codeLine: 3 });
+                    
+                    while (copie > 0) {
+                        steps.push({ label: "Verificare copie > 0", state: { num, baza, copie, rezultat, putere }, exp: `copie (${copie}) > 0 ? DA.`, codeLine: 5 });
+                        let rest = copie % baza;
+                        rezultat += rest * putere;
+                        steps.push({ label: "Adunare rest la rezultat", state: { num, baza, copie, rezultat, putere }, exp: `Restul copie % baza = ${rest}. Înmulțit cu puterea: adăugăm la rezultat => ${rezultat}`, codeLine: 6 });
+                        putere *= 10;
+                        steps.push({ label: "Actualizare putere", state: { num, baza, copie, rezultat, putere }, exp: `Înmulțim puterea cu 10 => ${putere}`, codeLine: 7 });
+                        copie = Math.floor(copie / baza);
+                        steps.push({ label: "Împărțire copie", state: { num, baza, copie, rezultat, putere }, exp: `copie = copie / baza => ${copie}`, codeLine: 8 });
+                    }
+                    steps.push({ label: "Afișare", state: { num, baza, copie: "-", rezultat, putere: "-" }, exp: `Afișăm rezultatul în baza ${baza}: ${rezultat}`, codeLine: 10, out: `baza=${rezultat}` });
+                    steps.push({ label: "STOP", state: { num, baza, copie: "-", rezultat, putere: "-" }, exp: "STOP", codeLine: 11, out: `baza=${rezultat}` });
+                    return steps;
+                }
+            },
+            numara_prime: {
+                name: "9. N numere - Numărare elemente prime",
+                inputs: [
+                    { id: "n", name: "Numărul de elemente (N):", default: 3 },
+                    { id: "vals", name: "Șirul (separate prin virgulă):", default: "5, 12, 11" }
+                ],
+                variables: ["n", "i", "x", "nr_prime"],
+                pseudocode:
+`citește n
+nr_prime <- 0
+┌ pentru i <- 1, n execută
+│   citește x
+│ ┌ dacă este_prim(x) atunci
+│ │   nr_prime <- nr_prime + 1
+│ └■
+└■
+scrie nr_prime`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+bool este_prim(int x) {
+    if (x < 2) return false;
+    for (int i = 2; i * i <= x; i++)
+        if (x % i == 0) return false;
+    return true;
+}
+
+int main() {
+    int n, x, nr_prime = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> x;
+        if (este_prim(x)) {
+            nr_prime++;
+        }
+    }
+    cout << "nr_prime=" << nr_prime;
+    return 0;
+}`,
+                python:
+`def este_prim(x):
+    if x < 2: return False
+    for i in range(2, int(x**0.5) + 1):
+        if x % i == 0: return False
+    return True
+
+n = int(input())
+nr_prime = 0
+for i in range(1, n + 1):
+    x = int(input())
+    if este_prim(x):
+        nr_prime += 1
+print(f"nr_prime={nr_prime}")`,
+                getSteps: (inputs) => {
+                    const n = parseInt(inputs[0]) || 0;
+                    const rawVals = inputs[1].split(',').map(v => parseInt(v.trim()) || 0);
+                    const steps = [];
+                    let nr_prime = "-";
+                    let i = "-";
+                    let x = "-";
+                    
+                    steps.push({ label: "START", state: { n, i, x, nr_prime }, exp: "START numărare numere prime.", codeLine: 1 });
+                    nr_prime = 0;
+                    steps.push({ label: "Inițializare contor", state: { n, i, x, nr_prime }, exp: "Setăm nr_prime = 0", codeLine: 2 });
+                    
+                    for (let stepI = 1; stepI <= n; stepI++) {
+                        i = stepI;
+                        x = rawVals[stepI - 1] !== undefined ? rawVals[stepI - 1] : 0;
+                        steps.push({ label: `Pas i = ${i}`, state: { n, i, x: "-", nr_prime }, exp: `Verificăm elementul i = ${i}`, codeLine: 3 });
+                        steps.push({ label: "Citire x", state: { n, i, x, nr_prime }, exp: `Am citit x = ${x}`, codeLine: 4 });
+                        
+                        let prim = isPrime(x);
+                        steps.push({ label: "Verificare prim", state: { n, i, x, nr_prime }, exp: `Numărul ${x} este prim? -> ${prim ? "DA" : "NU"}`, codeLine: 5 });
+                        if (prim) {
+                            nr_prime++;
+                            steps.push({ label: "Incrementare contor", state: { n, i, x, nr_prime }, exp: `Incrementăm nr_prime: ${nr_prime}`, codeLine: 6 });
+                        }
+                    }
+                    steps.push({ label: "Afișare", state: { n, i: "-", x: "-", nr_prime }, exp: `Afișăm câte numere prime s-au găsit: ${nr_prime}`, codeLine: 10, out: `nr_prime=${nr_prime}` });
+                    steps.push({ label: "STOP", state: { n, i: "-", x: "-", nr_prime }, exp: "STOP", codeLine: 11, out: `nr_prime=${nr_prime}` });
+                    return steps;
+                }
+            },
+            numara_palindroame: {
+                name: "10. N numere - Numărare palindroame",
+                inputs: [
+                    { id: "n", name: "Numărul de elemente (N):", default: 3 },
+                    { id: "vals", name: "Șirul (separate prin virgulă):", default: "121, 34, 55" }
+                ],
+                variables: ["n", "i", "x", "nr_palindroame"],
+                pseudocode:
+`citește n
+nr_palindroame <- 0
+┌ pentru i <- 1, n execută
+│   citește x
+│ ┌ dacă este_palindrom(x) atunci
+│ │   nr_palindroame <- nr_palindroame + 1
+│ └■
+└■
+scrie nr_palindroame`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+bool este_palindrom(int x) {
+    int copie = x, og = 0;
+    while (copie > 0) {
+        og = og * 10 + copie % 10;
+        copie /= 10;
+    }
+    return x == og;
+}
+
+int main() {
+    int n, x, nr_palindroame = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> x;
+        if (este_palindrom(x)) {
+            nr_palindroame++;
+        }
+    }
+    cout << "nr_palindroame=" << nr_palindroame;
+    return 0;
+}`,
+                python:
+`def este_palindrom(x):
+    copie, og = x, 0
+    while copie > 0:
+        og = og * 10 + copie % 10
+        copie //= 10
+    return x == og
+
+n = int(input())
+nr_palindroame = 0
+for i in range(1, n + 1):
+    x = int(input())
+    if este_palindrom(x):
+        nr_palindroame += 1
+print(f"nr_palindroame={nr_palindroame}")`,
+                getSteps: (inputs) => {
+                    const n = parseInt(inputs[0]) || 0;
+                    const rawVals = inputs[1].split(',').map(v => parseInt(v.trim()) || 0);
+                    const steps = [];
+                    let nr_palindroame = "-";
+                    let i = "-";
+                    let x = "-";
+                    
+                    steps.push({ label: "START", state: { n, i, x, nr_palindroame }, exp: "START numărare palindroame.", codeLine: 1 });
+                    nr_palindroame = 0;
+                    steps.push({ label: "Inițializare contor", state: { n, i, x, nr_palindroame }, exp: "Setăm nr_palindroame = 0", codeLine: 2 });
+                    
+                    for (let stepI = 1; stepI <= n; stepI++) {
+                        i = stepI;
+                        x = rawVals[stepI - 1] !== undefined ? rawVals[stepI - 1] : 0;
+                        steps.push({ label: `Pas i = ${i}`, state: { n, i, x: "-", nr_palindroame }, exp: `Verificăm elementul i = ${i}`, codeLine: 3 });
+                        steps.push({ label: "Citire x", state: { n, i, x, nr_palindroame }, exp: `Am citit x = ${x}`, codeLine: 4 });
+                        
+                        let pal = isPalindrome(x);
+                        steps.push({ label: "Verificare palindrom", state: { n, i, x, nr_palindroame }, exp: `Numărul ${x} este palindrom? -> ${pal ? "DA" : "NU"}`, codeLine: 5 });
+                        if (pal) {
+                            nr_palindroame++;
+                            steps.push({ label: "Incrementare contor", state: { n, i, x, nr_palindroame }, exp: `Incrementăm nr_palindroame: ${nr_palindroame}`, codeLine: 6 });
+                        }
+                    }
+                    steps.push({ label: "Afișare", state: { n, i: "-", x: "-", nr_palindroame }, exp: `Afișăm câte palindroame s-au găsit: ${nr_palindroame}`, codeLine: 10, out: `nr_palindroame=${nr_palindroame}` });
+                    steps.push({ label: "STOP", state: { n, i: "-", x: "-", nr_palindroame }, exp: "STOP", codeLine: 11, out: `nr_palindroame=${nr_palindroame}` });
+                    return steps;
+                }
+            },
+            suma_patrate: {
+                name: "11. N numere - Suma celor care sunt pătrate perfecte",
+                inputs: [
+                    { id: "n", name: "Numărul de elemente (N):", default: 4 },
+                    { id: "vals", name: "Șirul (separate prin virgulă):", default: "16, 5, 9, 12" }
+                ],
+                variables: ["n", "i", "x", "suma"],
+                pseudocode:
+`citește n
+suma <- 0
+┌ pentru i <- 1, n execută
+│   citește x
+│ ┌ dacă este_patrat_perfect(x) atunci
+│ │   suma <- suma + x
+│ └■
+└■
+scrie suma`,
+                cpp:
+`#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool este_patrat_perfect(int x) {
+    if (x < 0) return false;
+    int r = round(sqrt(x));
+    return r * r == x;
+}
+
+int main() {
+    int n, x, suma = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> x;
+        if (este_patrat_perfect(x)) {
+            suma += x;
+        }
+    }
+    cout << "suma=" << suma;
+    return 0;
+}`,
+                python:
+`import math
+
+def este_patrat_perfect(x):
+    if x < 0: return False
+    r = int(math.isqrt(x))
+    return r * r == x
+
+n = int(input())
+suma = 0
+for i in range(1, n + 1):
+    x = int(input())
+    if este_patrat_perfect(x):
+        suma += x
+print(f"suma={suma}")`,
+                getSteps: (inputs) => {
+                    const n = parseInt(inputs[0]) || 0;
+                    const rawVals = inputs[1].split(',').map(v => parseInt(v.trim()) || 0);
+                    const steps = [];
+                    let suma = "-";
+                    let i = "-";
+                    let x = "-";
+                    
+                    steps.push({ label: "START", state: { n, i, x, suma }, exp: "START calcul sumă pătrate perfecte.", codeLine: 1 });
+                    suma = 0;
+                    steps.push({ label: "Inițializare sumă", state: { n, i, x, suma }, exp: "Setăm suma = 0", codeLine: 2 });
+                    
+                    for (let stepI = 1; stepI <= n; stepI++) {
+                        i = stepI;
+                        x = rawVals[stepI - 1] !== undefined ? rawVals[stepI - 1] : 0;
+                        steps.push({ label: `Pas i = ${i}`, state: { n, i, x: "-", suma }, exp: `Verificăm elementul i = ${i}`, codeLine: 3 });
+                        steps.push({ label: "Citire x", state: { n, i, x, suma }, exp: `Am citit x = ${x}`, codeLine: 4 });
+                        
+                        let pp = isPerfectSquare(x);
+                        steps.push({ label: "Verificare pătrat perfect", state: { n, i, x, suma }, exp: `Numărul ${x} este pătrat perfect? (r=√${x} și r*r==x) -> ${pp ? "DA" : "NU"}`, codeLine: 5 });
+                        if (pp) {
+                            suma += x;
+                            steps.push({ label: "Actualizare sumă", state: { n, i, x, suma }, exp: `Adunăm x la sumă => suma = ${suma}`, codeLine: 6 });
+                        }
+                    }
+                    steps.push({ label: "Afișare", state: { n, i: "-", x: "-", suma }, exp: `Suma finală a pătratelor perfecte este: ${suma}`, codeLine: 10, out: `suma=${suma}` });
+                    steps.push({ label: "STOP", state: { n, i: "-", x: "-", suma }, exp: "STOP", codeLine: 11, out: `suma=${suma}` });
+                    return steps;
+                }
+            },
+            numara_perfecte: {
+                name: "12. N numere - Numărare elemente perfecte",
+                inputs: [
+                    { id: "n", name: "Numărul de elemente (N):", default: 3 },
+                    { id: "vals", name: "Șirul (separate prin virgulă):", default: "6, 12, 28" }
+                ],
+                variables: ["n", "i", "x", "nr_perfecte"],
+                pseudocode:
+`citește n
+nr_perfecte <- 0
+┌ pentru i <- 1, n execută
+│   citește x
+│ ┌ dacă este_perfect(x) atunci
+│ │   nr_perfecte <- nr_perfecte + 1
+│ └■
+└■
+scrie nr_perfecte`,
+                cpp:
+`#include <iostream>
+using namespace std;
+
+bool este_perfect(int x) {
+    if (x < 2) return false;
+    int suma = 1;
+    for (int i = 2; i * i <= x; i++) {
+        if (x % i == 0) {
+            suma += i;
+            if (i * i != x) suma += x / i;
+        }
+    }
+    return suma == x;
+}
+
+int main() {
+    int n, x, nr_perfecte = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> x;
+        if (este_perfect(x)) {
+            nr_perfecte++;
+        }
+    }
+    cout << "nr_perfecte=" << nr_perfecte;
+    return 0;
+}`,
+                python:
+`def este_perfect(x):
+    if x < 2: return False
+    suma = 1
+    for i in range(2, int(x**0.5) + 1):
+        if x % i == 0:
+            suma += i
+            if i * i != x:
+                suma += x // i
+    return suma == x
+
+n = int(input())
+nr_perfecte = 0
+for i in range(1, n + 1):
+    x = int(input())
+    if este_perfect(x):
+        nr_perfecte += 1
+print(f"nr_perfecte={nr_perfecte}")`,
+                getSteps: (inputs) => {
+                    const n = parseInt(inputs[0]) || 0;
+                    const rawVals = inputs[1].split(',').map(v => parseInt(v.trim()) || 0);
+                    const steps = [];
+                    let nr_perfecte = "-";
+                    let i = "-";
+                    let x = "-";
+                    
+                    steps.push({ label: "START", state: { n, i, x, nr_perfecte }, exp: "START numărare numere perfecte (numere egale cu suma divizorilor lor proprii).", codeLine: 1 });
+                    nr_perfecte = 0;
+                    steps.push({ label: "Inițializare contor", state: { n, i, x, nr_perfecte }, exp: "Setăm nr_perfecte = 0", codeLine: 2 });
+                    
+                    for (let stepI = 1; stepI <= n; stepI++) {
+                        i = stepI;
+                        x = rawVals[stepI - 1] !== undefined ? rawVals[stepI - 1] : 0;
+                        steps.push({ label: `Pas i = ${i}`, state: { n, i, x: "-", nr_perfecte }, exp: `Verificăm elementul i = ${i}`, codeLine: 3 });
+                        steps.push({ label: "Citire x", state: { n, i, x, nr_perfecte }, exp: `Am citit x = ${x}`, codeLine: 4 });
+                        
+                        let perf = isPerfect(x);
+                        steps.push({ label: "Verificare număr perfect", state: { n, i, x, nr_perfecte }, exp: `Este ${x} număr perfect? (Suma divizorilor proprii egalează ${x}?) -> ${perf ? "DA (ex: 6 = 1+2+3)" : "NU"}`, codeLine: 5 });
+                        if (perf) {
+                            nr_perfecte++;
+                            steps.push({ label: "Incrementare contor", state: { n, i, x, nr_perfecte }, exp: `Incrementăm nr_perfecte: ${nr_perfecte}`, codeLine: 6 });
+                        }
+                    }
+                    steps.push({ label: "Afișare", state: { n, i: "-", x: "-", nr_perfecte }, exp: `Afișăm câte numere perfecte s-au găsit: ${nr_perfecte}`, codeLine: 10, out: `nr_perfecte=${nr_perfecte}` });
+                    steps.push({ label: "STOP", state: { n, i: "-", x: "-", nr_perfecte }, exp: "STOP", codeLine: 11, out: `nr_perfecte=${nr_perfecte}` });
+                    return steps;
+                }
+            }
+        };
+
+        // State global simulator
+        let currentAlgorithmKey = "suma_n";
+        let simulationSteps = [];
+        let currentStepIndex = 0;
+        let isAutoPlaying = false;
+        let autoPlayTimer = null;
+        let activeTab = "pseudocode";
+
+        // Elemente DOM selector
+        const algoSelector = document.getElementById('algo-selector');
+        const valInput1 = document.getElementById('val-input-1');
+        const valInput2 = document.getElementById('val-input-2');
+        
+        const lblInput1 = document.getElementById('lbl-input-1');
+        const lblInput2 = document.getElementById('lbl-input-2');
+        
+        const containerInput1 = document.getElementById('container-input-1');
+        const containerInput2 = document.getElementById('container-input-2');
+
+        const btnReset = document.getElementById('btn-reset');
+        const btnStep = document.getElementById('btn-step');
+        const btnAuto = document.getElementById('btn-auto');
+        
+        const speedSlider = document.getElementById('speed-slider');
+        const speedLabel = document.getElementById('speed-label');
+        
+        const memoryVariables = document.getElementById('memory-variables');
+        const stepExplanation = document.getElementById('step-explanation');
+        const consoleOutput = document.getElementById('console-output');
+        
+        const traceHeader = document.getElementById('trace-header');
+        const traceTableBody = document.getElementById('trace-table-body');
+
+        // Navigare Teorie
+        function showTheoryTab(tabId) {
+            document.querySelectorAll('.t-nav-btn').forEach(btn => {
+                btn.className = "t-nav-btn text-[11px] font-semibold py-2 px-1 rounded-lg text-center transition-all text-slate-400 hover:text-white hover:bg-slate-800";
+            });
+            document.getElementById(`btn-${tabId}`).className = "t-nav-btn text-[11px] font-semibold py-2 px-1 rounded-lg text-center transition-all bg-indigo-600 text-white border border-indigo-500/30";
+
+            document.querySelectorAll('.theory-view').forEach(view => {
+                view.classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('theory-scroll-container').scrollTop = 0;
+        }
+
+        // Schimbare Algoritm
+        function updateAlgorithmInputs() {
+            const algo = ALGORITHMS[currentAlgorithmKey];
+            
+            containerInput1.classList.add('hidden');
+            containerInput2.classList.add('hidden');
+
+            if (algo.inputs[0]) {
+                containerInput1.classList.remove('hidden');
+                lblInput1.innerText = algo.inputs[0].name;
+                valInput1.value = algo.inputs[0].default;
+            }
+            if (algo.inputs[1]) {
+                containerInput2.classList.remove('hidden');
+                lblInput2.innerText = algo.inputs[1].name;
+                valInput2.value = algo.inputs[1].default;
+            }
+
+            document.getElementById('code-pseudocode').innerText = algo.pseudocode;
+            document.getElementById('code-cpp').innerText = algo.cpp;
+            document.getElementById('code-python').innerText = algo.python;
+
+            initSimulation();
+        }
+
+        // Inițializarea pas-cu-pas
+        function initSimulation() {
+            stopAutoPlay();
+            currentStepIndex = 0;
+            
+            const algo = ALGORITHMS[currentAlgorithmKey];
+            const inputs = [];
+            if (algo.inputs[0]) inputs.push(valInput1.value);
+            if (algo.inputs[1]) inputs.push(valInput2.value);
+
+            simulationSteps = algo.getSteps(inputs);
+
+            stepExplanation.innerHTML = "Simulatorul este pregătit. Apasă <strong class='text-indigo-400'>Pasul Următor</strong> sau <strong class='text-emerald-400'>Rulare Auto</strong> pentru a porni urmărirea pas cu pas.";
+            consoleOutput.innerText = "-";
+
+            renderMemory(simulationSteps[0].state);
+
+            // Capul tabelului de rulare dinamic
+            traceHeader.innerHTML = `
+                <th class="p-3 text-slate-500 font-semibold uppercase tracking-wider">Pas</th>
+                <th class="p-3 text-slate-500 font-semibold uppercase tracking-wider">Acțiune</th>
+                ${algo.variables.map(v => `<th class="p-3 text-slate-300 font-bold uppercase tracking-wider font-mono">${v}</th>`).join('')}
+                <th class="p-3 text-emerald-400 font-semibold uppercase tracking-wider">Ieșire</th>
+            `;
+
+            traceTableBody.innerHTML = `
+                <tr>
+                    <td colspan="${3 + algo.variables.length}" class="p-4 text-center text-slate-500 italic font-sans">
+                        Așteptare rulare...
+                    </td>
+                </tr>
+            `;
+
+            highlightSourceCodeLine(null);
+        }
+
+        // Randarea variabilelor în simulator
+        function renderMemory(state) {
+            memoryVariables.innerHTML = "";
+            const keys = Object.keys(state);
+            keys.forEach(key => {
+                const val = state[key];
+                const div = document.createElement('div');
+                div.className = "bg-slate-950 border border-slate-800 rounded-xl p-2.5 flex justify-between items-center transition-all hover:border-slate-700";
+                div.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                        <span class="text-xs text-slate-400 font-semibold font-mono">${key}</span>
+                    </div>
+                    <span class="text-xs font-extrabold font-mono text-indigo-300 bg-indigo-950/40 border border-indigo-900/30 px-2.5 py-0.5 rounded-lg">${val}</span>
+                `;
+                memoryVariables.appendChild(div);
+            });
+        }
+
+        // Adăugarea unui rând în Trace Table
+        function addTraceRow(index, step, variables) {
+            if (index === 0) {
+                traceTableBody.innerHTML = "";
+            }
+
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-slate-900/40 transition-colors text-xs border-b border-slate-900";
+            
+            let varsHtml = "";
+            variables.forEach(v => {
+                const val = step.state[v] !== undefined ? step.state[v] : "-";
+                varsHtml += `<td class="p-3 font-mono font-bold text-slate-300">${val}</td>`;
+            });
+
+            tr.innerHTML = `
+                <td class="p-3 text-slate-500 font-semibold font-mono">${index + 1}</td>
+                <td class="p-3 text-slate-200 font-medium">${step.label}</td>
+                ${varsHtml}
+                <td class="p-3 text-emerald-400 font-mono font-bold">${step.out || "-"}</td>
+            `;
+            traceTableBody.appendChild(tr);
+        }
+
+        // Evidențierea liniei corespunzătoare din cod
+        function highlightSourceCodeLine(lineNumber) {
+            const activeCodeContainer = document.getElementById(`code-${activeTab}`);
+            if (!activeCodeContainer) return;
+            
+            const originalText = ALGORITHMS[currentAlgorithmKey][activeTab];
+            const lines = originalText.split('\n');
+            
+            const formatted = lines.map((line, idx) => {
+                if (lineNumber !== null && (idx + 1) === lineNumber) {
+                    return `<div class="bg-indigo-950/70 border-l-4 border-indigo-500 pl-2 text-white font-bold py-0.5 animate-pulse">${line}</div>`;
+                }
+                return `<div class="pl-3 py-0.5">${line}</div>`;
+            }).join('');
+            
+            activeCodeContainer.innerHTML = formatted;
+        }
+
+        // Executarea unui singur pas din algoritm
+        function executeNextStep() {
+            if (currentStepIndex >= simulationSteps.length) {
+                stepExplanation.innerHTML = "<strong class='text-amber-400'>Final:</strong> Execuția s-a încheiat. Apasă pe 'Reset' pentru a reîncepe.";
+                stopAutoPlay();
+                return;
+            }
+
+            const step = simulationSteps[currentStepIndex];
+            
+            stepExplanation.innerHTML = `<span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded mr-1.5 font-bold font-mono">Pas ${currentStepIndex+1}</span> ${step.exp}`;
+            
+            if (step.out) {
+                consoleOutput.innerText = step.out;
+            } else if (currentStepIndex === 0) {
+                consoleOutput.innerText = "-";
+            }
+
+            renderMemory(step.state);
+            highlightSourceCodeLine(step.codeLine);
+            addTraceRow(currentStepIndex, step, ALGORITHMS[currentAlgorithmKey].variables);
+
+            currentStepIndex++;
+
+            if (currentStepIndex >= simulationSteps.length) {
+                stopAutoPlay();
+            }
+        }
+
+        // Auto Play
+        function startAutoPlay() {
+            if (isAutoPlaying) return;
+            isAutoPlaying = true;
+            btnAuto.innerText = "⏸️ Pauză";
+            btnAuto.classList.replace("bg-emerald-600", "bg-amber-600");
+            btnAuto.classList.replace("hover:bg-emerald-500", "hover:bg-amber-500");
+
+            const speed = parseInt(speedSlider.value);
+            autoPlayTimer = setInterval(() => {
+                executeNextStep();
+            }, speed);
+        }
+
+        function stopAutoPlay() {
+            if (!isAutoPlaying) return;
+            isAutoPlaying = false;
+            btnAuto.innerText = "▶️ Rulare Auto";
+            btnAuto.classList.replace("bg-amber-600", "bg-emerald-600");
+            btnAuto.classList.replace("hover:bg-amber-500", "hover:bg-emerald-500");
+            clearInterval(autoPlayTimer);
+            autoPlayTimer = null;
+        }
+
+        // Schimbare tab format cod
+        function switchTab(tabKey) {
+            activeTab = tabKey;
+            
+            document.querySelectorAll('.code-tab-btn').forEach(btn => {
+                btn.className = "code-tab-btn px-3 py-1 text-xs font-medium rounded-lg text-slate-400 hover:text-white transition-all";
+            });
+            document.getElementById(`tab-${tabKey}`).className = "code-tab-btn px-3 py-1 text-xs font-semibold rounded-lg bg-indigo-950/40 text-indigo-400 border border-indigo-500/30 transition-all";
+
+            document.querySelectorAll('.code-block-content').forEach(block => {
+                block.classList.add('hidden');
+            });
+            document.getElementById(`code-${tabKey}`).classList.remove('hidden');
+
+            const currentStep = simulationSteps[Math.max(0, currentStepIndex - 1)];
+            highlightSourceCodeLine(currentStep ? currentStep.codeLine : null);
+        }
+
+        // Event listeners
+        algoSelector.addEventListener('change', (e) => {
+            currentAlgorithmKey = e.target.value;
+            updateAlgorithmInputs();
+        });
+
+        btnStep.addEventListener('click', () => {
+            stopAutoPlay();
+            executeNextStep();
+        });
+
+        btnAuto.addEventListener('click', () => {
+            if (isAutoPlaying) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        });
+
+        btnReset.addEventListener('click', initSimulation);
+
+        speedSlider.addEventListener('input', () => {
+            const val = (speedSlider.value / 1000).toFixed(1);
+            speedLabel.innerText = `${val}s`;
+            if (isAutoPlaying) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        });
+
+        // Incărcare inițială
+        window.onload = () => {
+            updateAlgorithmInputs();
+        };
+    </script>
+</body>
+</html>
+
+
+Am livrat fișierul HTML cu design premium ce cuprinde toate explicațiile riguroase, detalierea fiecărui operator din programă, precum și simularea completă pas-cu-pas a tuturor celor 12 probleme complexe, corelate complet în Pseudocod, C++ și Python.
